@@ -1,0 +1,45 @@
+#!/usr/bin/env python
+# -*- coding: UTF-8 -*-
+"""
+This module imports and starts all python masks.
+The masks runs in the background.
+
+The visibility of each mask is controlled in the mask file.
+Example:
+  Open the sub folder "MASKS" and the file "Mask_Example".
+  Look at: embeddedWindow(plcSymbol = 'MG_PYM_Mask_Example')
+
+Some masks can be imported in accordance with a PLC symbol.
+Example:
+  if jh.Get(GLOBAL_SYMBOL + PLC_OEMMACHINE_WINDOW_ACTIVE) != None:
+      import MASKS.Mask_OEMmachine
+The token "GLOBAL_SYMBOL" and "PLC_OEMMACHINE_WINDOW_ACTIVE" are defined in the file "COMMON/PLC_SYMBOLS_DEF"
+
+HOW TO CREATE A NEW MASK FILE?
+ - Create a new file with the extension .py in the sub folder MASKS.
+ - Import the new file name like:  import MASKS.Mask_Example (without extension ).
+ - Define all pygtk or plcgtk widgets in the new file.
+ - For more details look into MAKS/Mask_Example.py.
+
+Author: JH PLC-Service / MCE / +49 (8669) 31-3102 / service.plc@heidenhain.de
+Version: 1.1
+"""
+
+# IMPORT MODULS
+#-----------------------------------------------------------
+import pygtk
+pygtk.require( '2.0' )
+import gtk                  # pygtk functions
+
+import pyjh                 # JH interface, version
+pyjh.require('3.2')
+import jh                   # Data-Access interface and Main-function
+
+from COMMON.PLC_SYMBOLS_DEF  import *
+
+# IMPORT MASKS TO RUN
+#-----------------------------------------------------------
+import MASKS.Mask_Example
+
+# run the jh.Main loop, to keep the script alive
+jh.Main()
